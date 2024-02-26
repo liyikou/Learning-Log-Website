@@ -75,4 +75,6 @@
     >  ```
     >
     >  遵循良好的提交规范有助于代码库的整洁性和可维护性。使用工具如 commitizen、Gitmoji 等可以帮助规范提交信息的格式。
-5. 
+5. 创建项目：`django-admin startproject learning_log .`
+    不要忘记 `.`，否则创建的目录不对。
+6. 迁移数据库创建Django基本表: `python manage.py migrate`
