@@ -84,3 +84,7 @@
 8. 创建超级用户：`python manage.py createsuperuser`
 9. 设置Topic model的后台管理
 10. 创建 Entry 表
+
+## Else
+
+1. 发现 git commit 的email是关联 Github的主要元素，关联上GitHub之后commit info就会显示头像。
