@@ -91,6 +91,8 @@
     2. 在 view.py 创建 function
     3. 在 urls.py 添加 路由
     4. 在 项目总 urls.py 包含 learning_logs App 的路由
+13. 创建并应用 base.html
+14. 
 
 ## Else
 

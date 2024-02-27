@@ -1,0 +1,8 @@
+<p>
+  <a href="{% url 'learning_logs:index' %}">Learning Log</a>
+  {# learning_logs 是一个命名空间 ，而index 是该命名空间中一个名称独特的URL模式。#}
+  {# 在Python代码中，我们几乎总是缩进四个空格。相比于Python文件，模板文件的缩进层级更多，因此每个层级通常只缩进两个空格。#}
+</p>
+
+{% block content %}{% endblock content %}
+{# 子模板并非必须定义父模板中的每个块，因此在父模板中，可使用任意多个块来预留空间，而子模板可根据需要定义相应数量的块。 #}
