@@ -83,3 +83,4 @@
    2. `python manage.py migrate`
 8. 创建超级用户：`python manage.py createsuperuser`
 9. 设置Topic model的后台管理
+10. 创建 Entry 表
