@@ -84,6 +84,7 @@
 8. 创建超级用户：`python manage.py createsuperuser`
 9. 设置Topic model的后台管理
 10. 创建 Entry 表
+11. `python manage.py shell`: 每次修改模型后，你都需要重启shell，这样才能看到修改的效果。要退出shell会话，可按Ctr + D；如果你使用的是Windows系统，应按Ctr + Z，再按回车键；如果是windows且安装了IPython，直接ctr + D，再按回车。
 
 ## Else
 

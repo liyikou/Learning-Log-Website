@@ -21,4 +21,7 @@ class Entry(models.Model):
         verbose_name_plural = 'entries'  # 复数形式，否则会展示为 'Entrys'
     
     def __str__(self) -> str:
-        return self.text[:50] + '...'
+        if len(self.text) > 50:
+            return self.text[:50] + '...'
+        else:
+            return self.text
