@@ -1,7 +1,8 @@
 <p>
-  <a href="{% url 'learning_logs:index' %}">Learning Log</a>
+  <a href="{% url 'learning_logs:index' %}">Learning Log</a> - 
   {# learning_logs 是一个命名空间 ，而index 是该命名空间中一个名称独特的URL模式。#}
   {# 在Python代码中，我们几乎总是缩进四个空格。相比于Python文件，模板文件的缩进层级更多，因此每个层级通常只缩进两个空格。#}
+  <a href="{% url 'learning_logs:topics' %}">Topics</a>
 </p>
 
 {% block content %}{% endblock content %}
