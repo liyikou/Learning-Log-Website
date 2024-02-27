@@ -85,6 +85,12 @@
 9. 设置Topic model的后台管理
 10. 创建 Entry 表
 11. `python manage.py shell`: 每次修改模型后，你都需要重启shell，这样才能看到修改的效果。要退出shell会话，可按Ctr + D；如果你使用的是Windows系统，应按Ctr + Z，再按回车键；如果是windows且安装了IPython，直接ctr + D，再按回车。
+12. 创建 index page。
+    1. 创建 index.html
+        > 在文件夹learning_logs中新建一个文件夹，并将其命名为templates。在文件夹templates中，再新建一个文件夹，并将其命名为 learning_logs。这好像有点多余（我们在文件夹learning_logs中创建了文件夹templates，又在这个文件夹中创建了文件夹learning_logs），但建立了Django能够明确解读的结构，即便项目很大，包含很多应用程序亦如此。
+    2. 在 view.py 创建 function
+    3. 在 urls.py 添加 路由
+    4. 在 项目总 urls.py 包含 learning_logs App 的路由
 
 ## Else
 
