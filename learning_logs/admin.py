@@ -1,3 +1,5 @@
 from django.contrib import admin
+from learning_logs.models import Topic
 
-# Register your models here.
+# Register Topic
+admin.site.register(Topic)
