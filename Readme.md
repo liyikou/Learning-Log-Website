@@ -78,3 +78,6 @@
 5. 创建项目：`django-admin startproject learning_log .`
     不要忘记 `.`，否则创建的目录不对。
 6. 迁移数据库创建Django基本表: `python manage.py migrate`
+7. 创建Topic表
+   1. `python manage.py makemigrations`
+   2. `python manage.py migrate`
