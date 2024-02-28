@@ -96,6 +96,11 @@
 15. 添加 Topic 详情页
     1. `r'^topics/(?P<topic_id>\d+)/$'` 。`r` 让Django将这个字符串视为原始字符串，并指出正则表达式包含在引号内。这个表达式的第二部分`（/(?P<topic_id>\d+)/)` 与包含在两个斜杠内的整数匹配，并将这个整数存储在一个名为 `topic_id` 的实参中。这部分表达式两边的括号捕获URL中的值；`?P<topic_id>` 将匹配的值存储到 `topic_id` 中；而表达式 `\d+` 与包含在两个斜杆内的任何数字都匹配，不管这个数字为多少位。
     2. `topic(request, topic_id)` view要添上正则的参数。
+16. 添加 Add Topic 功能
+    1. forms--ModelForm
+    2. request的属性
+    3. forms初始化
+    4. forms.is_valid()
 
 ## Else
 
