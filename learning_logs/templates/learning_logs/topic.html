@@ -2,12 +2,13 @@
 
 {% block content %}
   <p>Topic: {{ topic }}</p>
+  <p><a href="{% url 'learning_logs:add_entry' topic.id %}">add new entry</a></p>
   <p>Entries:</p>
   <ul>
     {% for entry in entries %}
       <li>
-        <p>{{ entry.date_added|date:'M d, Y H:i' }}</p>
-        <p>{{ entry.text|linebreaks }}</p>
+        <p>{{ entry.date_added|date:'M d, Y H:i' }}</p>  {# 设置日期显示格式：月 日，年 时：分 #}
+        <p>{{ entry.text|linebreaks }}</p>  {# 将 '\n' 转为 '<br>' #}
       </li>
     {% empty %}
       <li>There are no entries for this topic yet.</li>
