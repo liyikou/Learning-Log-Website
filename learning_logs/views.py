@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponseServerError
 from django.urls import reverse
 
-from .models import Topic
+from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
 
 
@@ -55,3 +55,22 @@ def add_entry(request, topic_id):
                 return HttpResponseRedirect(redirect_to=reverse(viewname="learning_logs:topic", args=[topic_id]))  # args存放重定向的url需要的所有实参
         context = {'topic': topic, 'form': form}
         return render(request, 'learning_logs/add_entry.html', context)
+    
+def edit_entry(request, entry_id):
+    try:
+        entry = Entry.objects.get(id=entry_id)
+        topic = entry.topic
+    except Entry.DoesNotExist:
+        return HttpResponseServerError("Entry not found.")
+    else:
+        if request.method != 'POST':
+            # GET请求页面：创建form实例，带值的form
+            form = EntryForm(instance=entry)  
+        else:
+            # 根据表单提交的数据创建form进行表单数据校验
+            form = EntryForm(data=request.POST, instance=entry)  # 必须加上instance否则topic字段没有填充，因为form的Meta类定义了fields限制为 'text'，否则页面加载form会多一个下拉菜单选Topic。
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(reverse('learning_logs:topic', args=[topic.id]))
+        context = {'topic': topic, 'entry': entry, 'form': form}
+        return render(request, 'learning_logs/edit_entry.html', context)

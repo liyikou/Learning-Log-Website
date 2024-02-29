@@ -9,6 +9,7 @@
       <li>
         <p>{{ entry.date_added|date:'M d, Y H:i' }}</p>  {# 设置日期显示格式：月 日，年 时：分 #}
         <p>{{ entry.text|linebreaks }}</p>  {# 将 '\n' 转为 '<br>' #}
+        <p><a href="{% url 'learning_logs:edit_entry' entry.id %}">Edit Entry</a></p>
       </li>
     {% empty %}
       <li>There are no entries for this topic yet.</li>
