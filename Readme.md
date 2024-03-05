@@ -105,6 +105,11 @@
     1. "topic not found": 在短语“topic not found”中，确实没有明显的系动词（linking verb），但这并不影响短语的完整性和语法正确性。在这种情况下，谓语“not found”实际上是一个动词短语，动词“found”在这里充当实义动词，表示了主语“topic”状态的变化，即主题未被找到的状态。在英语语法中，有些表达方式可以在没有系动词的情况下完成句子，尤其是在简洁明了的短语或标题中。这种简洁的表达方式有时候更直接地传达信息，尤其当强调动作或状态的时候。由于这个短语是一个通用短语，所以它的简洁性有助于快速传达信息，省去了多余的词语，但在语法上仍然是合理和正确的。
 18. Edit Entry 功能
     注意理解form的instance
+19. 登录功能
+    1. 创建users App: `python manage.py startapp users`
+    2. 项目 settings 激活APP
+    3. urls.py views.py login.html设计
+    4. 主页设置根据 users.is_authenticated 显示不同信息
 
 ## Bugs
 

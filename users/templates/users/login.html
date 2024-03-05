@@ -1,0 +1,13 @@
+{% extends "learning_logs/base.html" %}  {# 一个应用程序中的模板可继承另一个应用程序中的模板 #}
+
+{% block content %}
+  {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+  <form method="post" action="{% url 'users:login' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">log in</button>
+    <input type="hidden" name="next" value="{% url 'learning_logs:index' %}" />  {# 隐藏的表单元素——'next' ，其中的实参value 告诉Django在用户成功登录后将其重定向到什么地方 #}
+  </form>
+{% endblock content %}
