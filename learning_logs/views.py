@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponseServerError
+from django.http import HttpResponseRedirect, HttpResponseServerError, HttpResponseForbidden
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
@@ -10,10 +10,9 @@ from .forms import TopicForm, EntryForm
 def index(request):
     return render(request, template_name='learning_logs/index.html')
 
-
 @login_required
 def topics(request):
-    topics = Topic.objects.order_by('date_added')
+    topics = Topic.objects.filter(owner=request.user).order_by('date_added')
     context = {"topics": topics}
     return render(request=request, template_name="learning_logs/topics.html", context=context)
 
@@ -21,6 +20,8 @@ def topics(request):
 def topic(request, topic_id):
     try:
         topic = Topic.objects.get(id=topic_id)
+        if topic.owner != request.user:
+            return HttpResponseForbidden()
         entries = topic.entry_set.order_by('-date_added')
     except Topic.DoesNotExist:
         return HttpResponseServerError(content="Topic not found.")
@@ -37,9 +38,11 @@ def add_topic(request):
     else:
         form = TopicForm(data=request.POST)  # 用提交的数据初始化Form
         if form.is_valid():
-            form.save()
+            new_topic = form.save(commit=False)
+            new_topic.owner = request.user
+            new_topic.save()
             return HttpResponseRedirect(redirect_to=reverse("learning_logs:topics"))
-    # GET / POST but form is not valid
+    # GET / (POST but form is not valid)
     context = {"form": form}
     return render(request=request, template_name="learning_logs/add_topic.html", context=context)
 
@@ -47,6 +50,9 @@ def add_topic(request):
 def add_entry(request, topic_id):
     try:
         topic = Topic.objects.get(id=topic_id)
+        # 防止用户在其他用户的主题下创建文章
+        if topic.owner != request.user:
+            return HttpResponseForbidden()
     except Topic.DoesNotExist:
         return HttpResponseServerError("Topic not found.")
     else:
@@ -67,6 +73,8 @@ def edit_entry(request, entry_id):
     try:
         entry = Entry.objects.get(id=entry_id)
         topic = entry.topic
+        if topic.owner != request.user:
+            return HttpResponseForbidden()
     except Entry.DoesNotExist:
         return HttpResponseServerError("Entry not found.")
     else:

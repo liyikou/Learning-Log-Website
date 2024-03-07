@@ -1,11 +1,11 @@
-import datetime
-from enum import auto
 from django.db import models
+from django.contrib.auth.models import User
 
 # Topic
 class Topic(models.Model):
     text = models.CharField(max_length=200)
     date_added = models.DateTimeField(auto_now_add=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)  # 关联User表，设置级联删除
     
     def __str__(self) -> str:
         return self.text
