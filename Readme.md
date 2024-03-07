@@ -112,6 +112,7 @@
     4. 主页设置根据 users.is_authenticated 显示不同信息
 20. 注册功能
     用Django的UserCreationForm作表单校验账号密码格式是否合法，authenticate来校验账户密码是否正确，login为新用户创建有效的会话。
+21. 添加登录限制
 
 ## Bugs
 
@@ -123,3 +124,9 @@
 ## Else
 
 1. 发现 git commit 的email是关联 Github的主要元素，关联上GitHub之后commit info就会显示头像。
+
+## Todo
+
+1. 手机号发送验证码注册
+2. 关联qq，微信号
+3. 忘记密码功能

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponseServerError
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
@@ -9,11 +10,14 @@ from .forms import TopicForm, EntryForm
 def index(request):
     return render(request, template_name='learning_logs/index.html')
 
+
+@login_required
 def topics(request):
     topics = Topic.objects.order_by('date_added')
     context = {"topics": topics}
     return render(request=request, template_name="learning_logs/topics.html", context=context)
 
+@login_required
 def topic(request, topic_id):
     try:
         topic = Topic.objects.get(id=topic_id)
@@ -26,6 +30,7 @@ def topic(request, topic_id):
         context = {"topic": topic, "entries": entries}
         return render(request=request, template_name="learning_logs/topic.html", context=context)
     
+@login_required
 def add_topic(request):
     if request.method != "POST":
         form = TopicForm()  # 未提交数据，创建新表单
@@ -38,6 +43,7 @@ def add_topic(request):
     context = {"form": form}
     return render(request=request, template_name="learning_logs/add_topic.html", context=context)
 
+@login_required
 def add_entry(request, topic_id):
     try:
         topic = Topic.objects.get(id=topic_id)
@@ -55,7 +61,8 @@ def add_entry(request, topic_id):
                 return HttpResponseRedirect(redirect_to=reverse(viewname="learning_logs:topic", args=[topic_id]))  # args存放重定向的url需要的所有实参
         context = {'topic': topic, 'form': form}
         return render(request, 'learning_logs/add_entry.html', context)
-    
+
+@login_required
 def edit_entry(request, entry_id):
     try:
         entry = Entry.objects.get(id=entry_id)
