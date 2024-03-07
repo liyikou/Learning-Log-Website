@@ -110,6 +110,8 @@
     2. 项目 settings 激活APP
     3. urls.py views.py login.html设计
     4. 主页设置根据 users.is_authenticated 显示不同信息
+20. 注册功能
+    用Django的UserCreationForm作表单校验账号密码格式是否合法，authenticate来校验账户密码是否正确，login为新用户创建有效的会话。
 
 ## Bugs
 
