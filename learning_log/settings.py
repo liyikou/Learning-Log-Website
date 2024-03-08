@@ -37,8 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 自定义应用
     'learning_logs',  # activate learning_logs App
     'users',  # activate users App
+    # 第三方应用
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +129,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Logging Settings
 LOGIN_URL = '/users/login/'
+
+# django-bootstrap3的设置
+BOOTSTRAP3 = {
+    "include_jquery": True,
+    "css_url": {
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css",
+        "integrity": "sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu",  # 保证文件传输完整性
+        "crossorigin": "anonymous",  # 跨域资源访问
+    },
+    "javascript_url": {
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js",
+        "integrity": "sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd",
+        "crossorigin": "anonymous",
+    },
+}

@@ -117,6 +117,22 @@
     1. Topic关联User，迁移数据库，设置当前已有的主题的 owner 字段关联为 某User的id
         > `python manage.py flush`--重构数据库结构，但是所有的数据都会消失。
     2. Topics、Topic、edit_entry、new_entry界面添加关联和限制
+23. 添加样式
+    1. `pip install django-bootstrap3` or `conda install django-bootstrap3`
+    2. 激活应用 INSTALLED_APPS 添加 'bootstrap'
+        > 遇到bug：django.template.library.InvalidTemplateLibrary: Invalid template library specified. ImportError raised when trying to load 'bootstrap3.templatetags.bootstrap3': cannot import name 'Mapping' from 'collections' (e:\MyPythonEnvs\python3-12\Lib\collections\__init__.py)
+        > 版本问题，我直接升级了 django-bootstrap 版本
+    3. 让django-bootstrap3包含jQuery
+        > 这是一个JavaScript库，让你能够使用Bootstrap模板提供的一些交互式元素;这些代码让你无需手工下载jQuery并将其放到正确的地方
+
+        ```python
+        BOOTSTRAP3 = {
+            'include_jquery': True,
+        }
+        ```
+
+    4. html文件 添加 `{% load bootstrap3 %}` 加载django-bootstrap3中的模板标签集; `{% bootstrap_css %}`加载css; `{% bootstrap_javascript %}` 加载js。
+    5. 添加head和title,导航栏等样式
 
 ## Bugs
 

@@ -1,17 +1,54 @@
-<p>
-  <a href="{% url 'learning_logs:index' %}">Learning Log</a> - 
-  {# learning_logs 是一个命名空间 ，而index 是该命名空间中一个名称独特的URL模式。#}
-  {# 在Python代码中，我们几乎总是缩进四个空格。相比于Python文件，模板文件的缩进层级更多，因此每个层级通常只缩进两个空格。#}
-  <a href="{% url 'learning_logs:topics' %}">Topics</a> -
-  {% if user.is_authenticated %}  {# 在Django身份验证系统中，每个模板都可使用变量user ，这个变量有一个is_authenticated 属性：如果用户已登录，该属性将为True ，否则为False 。#}
-    Hello, {{ user.username }}.
-    <a href="{% url 'users:logout' %}">log out</a>
-  {% else %}
-    <a href="{% url 'users:register' %}">register</a> -
-    <a href="{% url 'users:login' %}">log in</a>
-  {% endif %}
+{% load bootstrap3 %}
 
-</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Log</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+  </head>
+  <body>
+    <!-- Static Navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">&#9660;</button>
+          {# 在用户缩小浏览器窗口或在屏幕较小的移动设备上显示网站时，collapse 会使导航栏折叠起来。 #}
+          <a class="navbar-brand" href="{% url 'learning_logs:index' %}">Learning Log</a>
+          {# learning_logs 是一个命名空间 ，而index 是该命名空间中一个名称独特的URL模式。#}
+          {# 在Python代码中，我们几乎总是缩进四个空格。相比于Python文件，模板文件的缩进层级更多，因此每个层级通常只缩进两个空格。#}
+        </div>
+        
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{% url 'learning_logs:topics' %}">Topics</a></li>
+          </ul>
 
-{% block content %}{% endblock content %}
-{# 子模板并非必须定义父模板中的每个块，因此在父模板中，可使用任意多个块来预留空间，而子模板可根据需要定义相应数量的块。 #}
+          <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}  {# 在Django身份验证系统中，每个模板都可使用变量user ，这个变量有一个is_authenticated 属性：如果用户已登录，该属性将为True ，否则为False 。#}
+              <li><a href="">Hello, {{ user.username }}.</a></li>    {# 当时漏掉a标签结果直接样式都错位了 #}
+              <li><a href="{% url 'users:logout' %}">log out</a></li>
+            {% else %}
+              <li><a href="{% url 'users:register' %}">register</a></li>
+              <li><a href="{% url 'users:login' %}">log in</a></li>
+            {% endif %}
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!-- /container -->
+    </nav>
+
+    <div class="container">
+      <div class="page-header">
+        {% block header %}{% endblock header %}
+      </div>
+      <div>
+        {% block content %}{% endblock content %}
+        {# 子模板并非必须定义父模板中的每个块，因此在父模板中，可使用任意多个块来预留空间，而子模板可根据需要定义相应数量的块。 #}
+      </div>
+    </div><!-- /container -->
+    
+  </body>
+</html>
