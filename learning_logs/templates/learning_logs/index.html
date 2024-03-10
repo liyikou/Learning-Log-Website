@@ -1,5 +1,13 @@
 {% extends "learning_logs/base.html" %}
 
+{% block header %}
+  <div class='jumbotron'>  
+    {# A Jumbotron (sometimes called "Jumbovision") is a large-screen television using technology developed by Sony, typically used in sports stadiums and concert venues to show close up shots of the event. Although JumboTron is a registered trademark owned by the Sony Corporation, the word jumbotron is often used by the public as a genericized trademark. #}
+    <h1>Track your learning.</h1>
+  </div>
+{% endblock header %}
+  
 {% block content %}
-  <p>Learning Log helps you keep track of your learning, for any topic you're learning about.</p>
+  <h2><a href="{% url 'users:register' %}">Register an account</a> to make your own Learning Log, and list the topics you're learning about.</h2>
+  <h2>Whenever you learn something new about a topic, make an entry summarizing what you've learned.</h2>
 {% endblock content %}

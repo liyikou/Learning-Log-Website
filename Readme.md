@@ -133,6 +133,7 @@
 
     4. html文件 添加 `{% load bootstrap3 %}` 加载django-bootstrap3中的模板标签集; `{% bootstrap_css %}`加载css; `{% bootstrap_javascript %}` 加载js。
     5. 添加head和title,导航栏等样式
+    6. 用bootstrap修改添加其他页面样式
 
 ## Bugs
 
