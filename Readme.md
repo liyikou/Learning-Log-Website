@@ -134,6 +134,14 @@
     4. html文件 添加 `{% load bootstrap3 %}` 加载django-bootstrap3中的模板标签集; `{% bootstrap_css %}`加载css; `{% bootstrap_javascript %}` 加载js。
     5. 添加head和title,导航栏等样式
     6. 用bootstrap修改添加其他页面样式
+    7. 添加favicon.ico和background
+       1. 自己用link标签定义icon路径
+       2. 写`route='/favicon'`重定向view
+        > 注意：修改了代码一定要重启实例，然后强刷html页面，这样最保险，否则总会有样式应用不上的情况。
+        > 关于django的静态文件配置和理解，看这些：
+        > 1. https://docs.djangoproject.com/zh-hans/5.0/intro/tutorial06/
+        > 2. https://docs.djangoproject.com/zh-hans/5.0/howto/static-files/
+        > 3. https://docs.djangoproject.com/zh-hans/5.0/ref/contrib/staticfiles/
 
 ## Bugs
 
@@ -152,3 +160,4 @@
 2. 关联qq，微信号
 3. 忘记密码功能
 4. 确保任何用户都可访问所有的博文，但只有已登录的用户能够发表博文以及编辑既有博文。
+5. 删除Topic，Entry功能
