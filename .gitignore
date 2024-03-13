@@ -77,6 +77,7 @@ infra/*/.tmp
 
 # Database working directory for development
 .db
+.sqlite3
 
 # Node files
 node_modules/
