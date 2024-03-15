@@ -1,10 +1,20 @@
 {% extends "learning_logs/base.html" %}
 
+{% load bootstrap3 %}
+
+{% block header %}
+  <h2>Register for a new world</h2>
+{% endblock header %}
+
 {% block content %}
-  <form method="post" action="{% url 'users:register' %}">
+  <form method="post" action="{% url 'users:register' %}" class="form">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button name="submit">register</button>
+    {% bootstrap_form form %}  {# 传入的是form实例 #}
+
+    {% buttons %}  {# 这个就是会加一个 bootstrap 的 class="form-group" 的 div #}
+      <button name="submit" class="btn btn-primary">register</button>
+    {% endbuttons %}
+
     <input type="hidden" name="next" value="{% url 'learning_logs:index' %}" />
   </form>
 {% endblock content %}

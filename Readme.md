@@ -244,6 +244,7 @@ LearningLog
        9. 新建一个User：`python manage.py createsuperuser` （用于后面 owner字段的默认值）
        10. 然后重新跑 learning_logs 的 migrations:`python manage.py makemigrations learning_logs` （中间提示的时候选择指定默认值，然后输入`1`就行——你也可以自己多创建几个，然后输入那个User的Id）、`python manage.py migrate learning_logs`大功告成！
 25. 修改了Topic的字段名字，修改对应调用地方
+26. 给Register页面添加了样式，并且修复了自定义User和UserCreationForm的bug。
 
 ## Bugs
 

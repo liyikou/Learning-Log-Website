@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 
 import re
 
+from .models import User
+
 
 class UserCreateForm(UserCreationForm):
     def clean_phone_number(self):
@@ -10,3 +12,7 @@ class UserCreateForm(UserCreationForm):
         if not re.match(r'^1[3456789]\d{9}$', phone_number):  # 1开头,3456789为第2个数字,然后跟9位数字
             raise forms.ValidationError("请输入有效的中国手机号码")
         return phone_number
+    
+    class Meta:
+        model = User
+        fields = ("username",)
