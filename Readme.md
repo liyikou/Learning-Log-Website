@@ -2,6 +2,26 @@
 
 ## Project Structure
 
+├─learning_log
+│  └─__pycache__
+├─learning_logs
+│  ├─migrations
+│  │  └─__pycache__
+│  ├─static
+│  │  └─learning_logs
+│  │      ├─css
+│  │      ├─image
+│  │      └─js
+│  ├─templates
+│  │  └─learning_logs
+│  └─__pycache__
+└─users
+    ├─migrations
+    │  └─__pycache__
+    ├─templates
+    │  └─users
+    └─__pycache__
+
 ## Note
 
 1. `conda create -n <env-name> python=3.10 django`
@@ -142,6 +162,26 @@
         > 1. https://docs.djangoproject.com/zh-hans/5.0/intro/tutorial06/
         > 2. https://docs.djangoproject.com/zh-hans/5.0/howto/static-files/
         > 3. https://docs.djangoproject.com/zh-hans/5.0/ref/contrib/staticfiles/
+24. 将Django的User换成自定义User
+    1. 继承AbstractUser，添加自定义字段
+    2. settings.py 添加 `AUTH_USER_MODEL = 'users.User'`：设置用于权限认证的User到底是哪个。不指定这个会报UserPermission等表需要这个自定义User给AbstractUser关联的那些权限外键表新定义一个related name；指定后会报django.db.migrations.exceptions.InconsistentMigrationHistory这个错，因为0003_topic_owner这个字段用了AUTH_USER_MODEL指定的表，现在你换表了，相当于新加，但是你之前却已经根据AUTH_USER_MODEL指定的表生成过外键字段，那就不一致了。
+
+    解决办法：
+    一、重来一遍
+       1. 删掉所有migration文件
+       2. 删掉数据库所有数据
+       3. `python manage.py makemigrations`
+       4. `python manage.py migrate`
+
+    二、找问题解决问题
+       报错其实就是owner字段的问题。
+       5. 先把所有添加User修改Topic的代码直接`git stash`一下，让代码回到之前的状态
+       6. 直接migrate 到这个migration上一个，0002_entry.py：`python manage.py migrate learning_logs 0002`(这会儿你的owner字段和对应字段的数据都没了)，然后删除掉0003_topic_owner.py文件
+       7. pop latest stash，把代码应用回来
+       8. 然后重新跑 users 的 migrations:`python manage.py makemigrations users`、`python manage.py migrate`（这会儿你之前的User数据都没了）
+       9. 新建一个User：`python manage.py createsuperuser` （用于后面 owner字段的默认值）
+       10. 然后重新跑 learning_logs 的 migrations:`python manage.py makemigrations learning_logs` （中间提示的时候选择指定默认值，然后输入`1`就行——你也可以自己多创建几个，然后输入那个User的Id）、`python manage.py migrate learning_logs`大功告成！
+25. 修改了Topic的字段名字，修改对应调用地方
 
 ## Bugs
 

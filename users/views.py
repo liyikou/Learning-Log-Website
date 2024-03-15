@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.contrib.auth.views import LoginView
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout, login, authenticate
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+
+from users.forms import UserCreateForm
 
 
 class Login(LoginView):
@@ -17,9 +18,9 @@ def logout_view(request):
 
 def register_view(request):
     if request.method != 'POST':
-        form = UserCreationForm()
+        form = UserCreateForm()
     else:
-        form = UserCreationForm(data=request.POST)
+        form = UserCreateForm(data=request.POST)
         if form.is_valid():
             new_user = form.save()
             authenticated_user = authenticate(username=new_user.username, password=request.POST['password1'])

@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -144,3 +144,6 @@ BOOTSTRAP3 = {
         "crossorigin": "anonymous",
     },
 }
+
+# 指定用于权限验证的model,不指定迁移会报错, 指定了迁移也会报另一种错
+AUTH_USER_MODEL = 'users.User'

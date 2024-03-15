@@ -10,7 +10,7 @@
     <div class="panel panel-default">  {# 由无序列表换为面板 #}
       <div class="panel-heading">  {# 面板标题 #}
         <h3>
-          {{ entry.date_added|date:'M d, Y H:i' }}  {# 设置日期显示格式：月 日，年 时：分 #}
+          {{ entry.date_created|date:'M d, Y H:i' }}  {# 设置日期显示格式：月 日，年 时：分 #}
           <small><a href="{% url 'learning_logs:edit_entry' entry.id %}">Edit entry</a></small>
         </h3>
       </div>
