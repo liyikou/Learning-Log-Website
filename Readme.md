@@ -2,24 +2,86 @@
 
 ## Project Structure
 
+LearningLog
+│  .gitignore
+│  db.sqlite3
+│  manage.py
+│  Readme.md
+│  structure.txt
+│
+├─.vscode
+│      launch.json
+│      settings.json
+│
 ├─learning_log
+│  │  asgi.py
+│  │  settings.py
+│  │  urls.py
+│  │  wsgi.py
+│  │  __init__.py
+│  │
 │  └─__pycache__
+│
 ├─learning_logs
+│  │  admin.py
+│  │  apps.py
+│  │  forms.py
+│  │  models.py
+│  │  tests.py
+│  │  urls.py
+│  │  views.py
+│  │  __init__.py
+│  │
 │  ├─migrations
+│  │  │  0001_initial.py
+│  │  │  0002_entry.py
+│  │  │  0003_topic_owner.py
+│  │  │  __init__.py
+│  │  │
 │  │  └─__pycache__
+│  │
 │  ├─static
 │  │  └─learning_logs
 │  │      ├─css
+│  │      │      base.css
+│  │      │
 │  │      ├─image
+│  │      │      beach.jpg
+│  │      │      favicon.ico
+│  │      │      NaturalGreen.jpeg
+│  │      │
 │  │      └─js
 │  ├─templates
 │  │  └─learning_logs
+│  │          add_entry.html
+│  │          add_topic.html
+│  │          base.html
+│  │          edit_entry.html
+│  │          index.html
+│  │          topic.html
+│  │          topics.html
+│  │
 │  └─__pycache__
+│
 └─users
+    │  admin.py
+    │  apps.py
+    │  models.py
+    │  tests.py
+    │  urls.py
+    │  views.py
+    │  __init__.py
+    │
     ├─migrations
+    │  │  __init__.py
+    │  │
     │  └─__pycache__
+    │
     ├─templates
     │  └─users
+    │          login.html
+    │          register.html
+    │
     └─__pycache__
 
 ## Note
@@ -159,9 +221,9 @@
        2. 写`route='/favicon'`重定向view
         > 注意：修改了代码一定要重启实例，然后强刷html页面，这样最保险，否则总会有样式应用不上的情况。
         > 关于django的静态文件配置和理解，看这些：
-        > 1. https://docs.djangoproject.com/zh-hans/5.0/intro/tutorial06/
-        > 2. https://docs.djangoproject.com/zh-hans/5.0/howto/static-files/
-        > 3. https://docs.djangoproject.com/zh-hans/5.0/ref/contrib/staticfiles/
+        > 1. <https://docs.djangoproject.com/zh-hans/5.0/intro/tutorial06/>
+        > 2. <https://docs.djangoproject.com/zh-hans/5.0/howto/static-files/>
+        > 3. <https://docs.djangoproject.com/zh-hans/5.0/ref/contrib/staticfiles/>
 24. 将Django的User换成自定义User
     1. 继承AbstractUser，添加自定义字段
     2. settings.py 添加 `AUTH_USER_MODEL = 'users.User'`：设置用于权限认证的User到底是哪个。不指定这个会报UserPermission等表需要这个自定义User给AbstractUser关联的那些权限外键表新定义一个related name；指定后会报django.db.migrations.exceptions.InconsistentMigrationHistory这个错，因为0003_topic_owner这个字段用了AUTH_USER_MODEL指定的表，现在你换表了，相当于新加，但是你之前却已经根据AUTH_USER_MODEL指定的表生成过外键字段，那就不一致了。
