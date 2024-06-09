@@ -2,6 +2,7 @@
 
 ## Project Structure
 
+```plaintext
 LearningLog
 │  .gitignore
 │  db.sqlite3
@@ -83,6 +84,49 @@ LearningLog
     │          register.html
     │
     └─__pycache__
+```
+
+## Requirement Analysis
+
+1. 未登录游客用户
+
+   1. 注册账号
+   2. 查看文章（免费级）
+
+2. 已登录用户
+
+   1. 注销账号
+   2. 评论，点赞，收藏
+      > 针对权限内的文章（权限范围内：普通用户——普通级；VIP用户——普通级和VIP级）
+      * 查看所有人的 评论，点赞，收藏(如果他人没有设置隐私)
+      * 添加 评论，点赞，收藏
+      * 删除/取消 评论，点赞，收藏（自己的）
+      > 不允许修改之前的评论，收藏；只能删除/取消后重新评论/点赞/收藏
+   3. 历史记录
+      * 查看历史记录（自己的）
+      * 删除历史记录（自己的）
+      * 自动添加浏览记录（自己的）
+   4. 查看文章（权限范围内：普通用户——普通级；VIP用户——普通级和VIP级）
+
+3. 管理员
+   > 拥有所有权限
+   1. 主题
+      * 增
+      * 删
+      * 查
+      * 改
+   2. 文章
+      * 增
+      * 删
+      * 查
+      * 改
+   3. 评论/点赞
+      * 增
+      * 删
+      * 查
+      > 评论不能被修改，只能增加/删除/查看
+   4. 历史记录/收藏
+      > 管理员不自动记录浏览记录和收藏功能，只进行发表文章和管理评论
 
 ## Note
 
@@ -117,46 +161,46 @@ LearningLog
     >      git config user.email "projectemail@example.com"
     >      ```
     >
-    >   确保你在每个项目的根目录中设置项目特定的用户信息。这样，每个项目的提交将使用该项目特定的用户信息。
-    >   要检查当前 Git 配置，可以使用以下命令：
+    > 确保你在每个项目的根目录中设置项目特定的用户信息。这样，每个项目的提交将使用该项目特定的用户信息。
+    > 要检查当前 Git 配置，可以使用以下命令：
     >
-    > - 检查全局用户信息：`git config --global --list`
-    > - 检查项目用户信息：`git config --list`
-    >
+    > * 检查全局用户信息：`git config --global --list`
+    > * 检查项目用户信息：`git config --list`
+
     >
     > **Git Commit 规范**
     > 在 Git 中，采用规范化的提交消息格式有助于团队协作和代码维护的效率。一种流行的规范是使用 Conventional Commits 规范。>按照这个规范，一个提交消息被分成三个部分：Header、Body 和 Footer。
     >
-    >  1. **Header**:
-    >     - Header 包含一个类型、一个可选的作用域（scope），以及一个描述性的消息。格式为 `<type>(<scope>): ><description>`.
-    >     - **Type**:
-    >       - feat: 新功能（feature）
-    >       - fix: 修复 bug
-    >       - docs: 文档修改
-    >       - style: 代码样式修改（不影响代码含义的变动，比如格式化）
-    >       - refactor: 代码重构
-    >       - test: 测试用例新增或修改
-    >       - chore: 构建过程或辅助工具的变动
-    >     - **Scope**：修改影响的范围（可选）
-    >     - **Description**：对本次提交的简要描述
+    > 1. **Header**:
+    >     * Header 包含一个类型、一个可选的作用域（scope），以及一个描述性的消息。格式为 `<type>(<scope>): ><description>`.
+    >     * **Type**:
+    >       * feat: 新功能（feature）
+    >       * fix: 修复 bug
+    >       * docs: 文档修改
+    >       * style: 代码样式修改（不影响代码含义的变动，比如格式化）
+    >       * refactor: 代码重构
+    >       * test: 测试用例新增或修改
+    >       * chore: 构建过程或辅助工具的变动
+    >     * **Scope**：修改影响的范围（可选）
+    >     * **Description**：对本次提交的简要描述
     >
-    >  2. **Body**:
-    >     - Body 是对 Header 进一步详细说明的部分，可以包含更多相关信息。
+    > 2. **Body**:
+    >     * Body 是对 Header 进一步详细说明的部分，可以包含更多相关信息。
     >
-    >  3. **Footer**:
-    >     - Footer 可以包含一些关闭 issues 的信息或者是针对不兼容变动的说明。
+    > 3. **Footer**:
+    >     * Footer 可以包含一些关闭 issues 的信息或者是针对不兼容变动的说明。
     >
-    >  例子：
+    > 例子：
     >
-    >  ```plaintext
-    >  feat(login): add social login options
+    > ```plaintext
+    > feat(login): add social login options
     >
-    >  This commit adds Google and Facebook login options to the login screen.
-    >  Closes #123.
+    > This commit adds Google and Facebook login options to the login screen.
+    > Closes #123.
     >
     >  ```
     >
-    >  遵循良好的提交规范有助于代码库的整洁性和可维护性。使用工具如 commitizen、Gitmoji 等可以帮助规范提交信息的格式。
+    > 遵循良好的提交规范有助于代码库的整洁性和可维护性。使用工具如 commitizen、Gitmoji 等可以帮助规范提交信息的格式。
 5. 创建项目：`django-admin startproject learning_log .`
     不要忘记 `.`，否则创建的目录不对。
 6. 迁移数据库创建Django基本表: `python manage.py migrate`
@@ -176,8 +220,12 @@ LearningLog
 13. 创建并应用 base.html
 14. 创建 Topics 页面
 15. 添加 Topic 详情页
-    1. `r'^topics/(?P<topic_id>\d+)/$'` 。`r` 让Django将这个字符串视为原始字符串，并指出正则表达式包含在引号内。这个表达式的第二部分`（/(?P<topic_id>\d+)/)` 与包含在两个斜杠内的整数匹配，并将这个整数存储在一个名为 `topic_id` 的实参中。这部分表达式两边的括号捕获URL中的值；`?P<topic_id>` 将匹配的值存储到 `topic_id` 中；而表达式 `\d+` 与包含在两个斜杆内的任何数字都匹配，不管这个数字为多少位。
+    1. `r'^topics/(?P<topic_id>\d+)/$'` 。
+
+        `r` 让Django将这个字符串视为原始字符串，并指出正则表达式包含在引号内。这个表达式的第二部分`（/(?P<topic_id>\d+)/)` 与包含在两个斜杠内的整数匹配，并将这个整数存储在一个名为 `topic_id` 的实参中。这部分表达式两边的括号捕获URL中的值；`?P<topic_id>` 将匹配的值存储到 `topic_id` 中；而表达式 `\d+` 与包含在两个斜杆内的任何数字都匹配，不管这个数字为多少位。
+
     2. `topic(request, topic_id)` view要添上正则的参数。
+
 16. 添加 Add Topic 功能
     1. forms--ModelForm
     2. request的属性
@@ -186,6 +234,7 @@ LearningLog
 17. Add Entry 功能
     1. "topic not found": 在短语“topic not found”中，确实没有明显的系动词（linking verb），但这并不影响短语的完整性和语法正确性。在这种情况下，谓语“not found”实际上是一个动词短语，动词“found”在这里充当实义动词，表示了主语“topic”状态的变化，即主题未被找到的状态。在英语语法中，有些表达方式可以在没有系动词的情况下完成句子，尤其是在简洁明了的短语或标题中。这种简洁的表达方式有时候更直接地传达信息，尤其当强调动作或状态的时候。由于这个短语是一个通用短语，所以它的简洁性有助于快速传达信息，省去了多余的词语，但在语法上仍然是合理和正确的。
 18. Edit Entry 功能
+
     注意理解form的instance
 19. 登录功能
     1. 创建users App: `python manage.py startapp users`
@@ -193,6 +242,7 @@ LearningLog
     3. urls.py views.py login.html设计
     4. 主页设置根据 users.is_authenticated 显示不同信息
 20. 注册功能
+
     用Django的UserCreationForm作表单校验账号密码格式是否合法，authenticate来校验账户密码是否正确，login为新用户创建有效的会话。
 21. 添加登录限制
 22. 将数据和用户关联，让用户只能访问自己的数据
@@ -226,9 +276,10 @@ LearningLog
         > 3. <https://docs.djangoproject.com/zh-hans/5.0/ref/contrib/staticfiles/>
 24. 将Django的User换成自定义User
     1. 继承AbstractUser，添加自定义字段
-    2. settings.py 添加 `AUTH_USER_MODEL = 'users.User'`：设置用于权限认证的User到底是哪个。不指定这个会报UserPermission等表需要这个自定义User给AbstractUser关联的那些权限外键表新定义一个related name；指定后会报django.db.migrations.exceptions.InconsistentMigrationHistory这个错，因为0003_topic_owner这个字段用了AUTH_USER_MODEL指定的表，现在你换表了，相当于新加，但是你之前却已经根据AUTH_USER_MODEL指定的表生成过外键字段，那就不一致了。
+    2. settings.py 添加 `AUTH_USER_MODEL = 'users.User'`：设置用于权限认证的User到底是哪个。不指定这个会报`UserPermission`等表需要这个`自定义User`给`AbstractUser`关联的那些权限外键表新定义一个`related name`；指定后会报`django.db.migrations.exceptions.InconsistentMigrationHistory`这个错，因为`0003_topic_owner`这个字段用了`AUTH_USER_MODEL`指定的表，现在你换表了，相当于新加，但是你之前却已经根据AUTH_USER_MODEL指定的表生成过外键字段，那就不一致了。
 
     解决办法：
+
     一、重来一遍
        1. 删掉所有migration文件
        2. 删掉数据库所有数据
@@ -236,7 +287,9 @@ LearningLog
        4. `python manage.py migrate`
 
     二、找问题解决问题
-       报错其实就是owner字段的问题。
+
+        报错其实就是owner字段的问题。
+
        5. 先把所有添加User修改Topic的代码直接`git stash`一下，让代码回到之前的状态
        6. 直接migrate 到这个migration上一个，0002_entry.py：`python manage.py migrate learning_logs 0002`(这会儿你的owner字段和对应字段的数据都没了)，然后删除掉0003_topic_owner.py文件
        7. pop latest stash，把代码应用回来
@@ -245,6 +298,10 @@ LearningLog
        10. 然后重新跑 learning_logs 的 migrations:`python manage.py makemigrations learning_logs` （中间提示的时候选择指定默认值，然后输入`1`就行——你也可以自己多创建几个，然后输入那个User的Id）、`python manage.py migrate learning_logs`大功告成！
 25. 修改了Topic的字段名字，修改对应调用地方
 26. 给Register页面添加了样式，并且修复了自定义User和UserCreationForm的bug。
+27. 新加了 点赞收藏评论 app，
+
+    `python manage.py startapp xxx`
+    INSTALL_APPS 添加这些apps，然后`makemigrations`，然后`migrate`
 
 ## Bugs
 

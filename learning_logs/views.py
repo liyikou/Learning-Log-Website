@@ -22,10 +22,11 @@ def topic(request, topic_id):
         topic = Topic.objects.get(id=topic_id)
         if topic.owner != request.user:
             return HttpResponseForbidden()
-        entries = topic.entry_set.order_by('-date_created')
+        entries = topic.entries.order_by('-date_created')
     except Topic.DoesNotExist:
         return HttpResponseServerError(content="Topic not found.")
     except Exception as e:
+        ''
         return HttpResponseServerError(content="Server occurred error.")
     else:
         context = {"topic": topic, "entries": entries}

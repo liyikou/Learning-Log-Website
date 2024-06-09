@@ -14,10 +14,16 @@ class Topic(models.Model):
     
 # Entry
 class Entry(models.Model):
-    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    ACCESS_PERMISSION_CHOICES = [
+        ('public', 'Public'),
+        ('authenticated', 'Authenticated'),
+        ('vip', 'VIP'),
+    ]
+    topic = models.ForeignKey(Topic, related_name='entries', on_delete=models.CASCADE)
     text = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
+    access_permission = models.CharField(max_length=32, choices=ACCESS_PERMISSION_CHOICES, default='public')
     
     # additional information
     class Meta:

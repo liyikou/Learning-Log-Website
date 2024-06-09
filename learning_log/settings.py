@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     # 自定义应用
     'learning_logs',  # activate learning_logs App
     'users',  # activate users App
+    'likes',
+    'favorites',
+    'comments',
+    'histories',
     # 第三方应用
     'bootstrap3',
 ]
